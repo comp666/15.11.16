@@ -13,10 +13,14 @@ $(function() {
 
     App.Views.Task = Backbone.View.extend({
         tagName: 'li',
+		template: template('taskTemplate'),
         render: function () {
-            this.$el.html( this.model.get('title'));
+			var template = this.template(this.model.toJSON());
+          this.$el.html( template );
             return this;
-        }
+        },
+		events:{
+		}
 	});
 	App.Collections.Task = Backbone.Collection.extend({
         model: App.Models.Task
@@ -50,7 +54,9 @@ $(function() {
     ])
 
 	var tasksView = new App.Views.Tasks({ collection: tasksCollection});
-	tasksView.render();
-	$('body').html(tasksView.el);
+     
+	 tasksView.render();
+	
+	$('.tasks').html(tasksView.el);
 	
 });
