@@ -33,7 +33,12 @@ App.Views.Task = Backbone.View.extend({
 		return this;
 	},
 	events:{
-	  'click .edit': 'editTask'
+	  'click .edit': 'editTask',
+	  'click .delete': 'destroy'
+	},
+	destroy: function (){
+		this.model.destroy();
+		console.log(tasksCollection);
 	},
 	editTask: function () {
 	var newTaskTitle =  prompt('Как переименуем задачу?', this.model.get('title'));
